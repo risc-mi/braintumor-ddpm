@@ -1,7 +1,48 @@
-## Semi-supervised Brain Tumor Segmentation using Diffusion Models
+# Semi-supervised Brain Tumor Segmentation using Diffusion Models
 
-Exploiting learned visual representations from DDPMs for brain tumor segmentation. Code will be released soon.
+We provide the official PyTorch implementation of the paper titled
+[Semi-supervised Brain Tumor Segmentation Using Diffusion Models](),
+by Ahmed Alshenoudy, Bertram Sabrowsky-Hirsch, Stefan Thumfart, Michael Giretzlehner and Erich Kobler.
 
+Our implementation is based on [Label-Efficient Semantic Segmentation with Diffusion Models](https://github.com/yandex-research/ddpm-segmentation),
+where we also employ [Improved Denoising Diffusion Probabilistic Models](https://github.com/openai/improved-diffusion).
+Various core functions were heavily influenced from [nnUNet V1](https://github.com/MIC-DKFZ/nnUNet/tree/nnunetv1/nnunet/training/network_training) as well.
 
-### TODOs:
-- [ ] Finalize readme.md
+## Overview
+In this paper, we leverage learned visual representations from diffusion models for the challenging task
+of brain tumor segmentation. We compare the segmentation performance against a supervised baseline over a varying degree
+of training samples. For the downstream segmentation task, we used pixel-level classifiers and additionally proposed the
+fine-tuning of the noise predictor network of the diffusion model. Our results show that, with less than 20 training samples,
+all methods outperform the supervised baseline across all tumor regions. We also provide a practical use-case where
+we automatically annotate tumor regions across different axial slices within the same patient, with very limited supervision.
+
+## Data
+We evaluate the presented approach on the Brain Tumor Segmentation (BraTS) 2021 data. Axial slices were extracted from the
+original 3D MR sequences, while stratifying longitudinal slicing locations to increase the proportion of slices containing
+a segmented tumor. All slices were normalized and down-sampled to (128, 128). This resulted in a dataset consisting of 8,757
+slices, of which 8,000 were used for testing and the 757 remaining slices were used as a training pool to sample various
+training datasets from for our experiments. 
+
+## Results
+- Our trained diffusion model and a small batch of generated samples can be found [here](https://www.dropbox.com/sh/78x8aamupsidxax/AABmtL06uEh6CGwWWvP3fcCMa?dl=0).
+We visualize a batch of generated mpMRI samples from the fully trained model in the figure below. This is to visually assess
+how well the model is able to approximate the dataset distribution.
+<figure>
+<img src="https://raw.githubusercontent.com/risc-mi/braintumor-ddpm/main/docs/assets/generated_samples.png"
+ alt="Generated 128 x 128 BraTS samples" style="width:100%">
+<figcaption><b>Fig. 1: Generated (128, 128) BraTS samples.</b></figcaption>
+</figure>
+
+&nbsp;
+
+- Extracted visual representations for sample inputs are visualized in Fig. 2, our results align with the original paper, where earlier
+layer capture high-level features and later layers capture more detailed features while also becoming noisier.
+<figure>
+<img src="https://raw.githubusercontent.com/risc-mi/braintumor-ddpm/main/docs/assets/representations.png"
+ alt="Generated 128 x 128 BraTS samples" style="width:100%">
+<figcaption><b>Fig. 2: Extracted visual representations for different samples across different layers and time steps.</b></figcaption>
+</figure>
+
+### Acknowledgements
+This project is financed by research subsidies granted by the government of Upper Austria.
+RISC Software GmbH is Member of UAR (Upper Austrian Research) Innovation Network.

@@ -110,9 +110,10 @@ class Resize:
         self.size = size
 
     def __call__(self, image, mask):
-        image = F.resize(image, self.size)
+        image = F.resize(image, self.size, antialias=True)
         if mask is not None:
-            mask = F.resize(mask, self.size, interpolation=T.InterpolationMode.NEAREST)
+            # results were acquired with antialias=None
+            mask = F.resize(mask, self.size, interpolation=T.InterpolationMode.NEAREST, antialias=True)
         return image, mask
 
 

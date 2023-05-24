@@ -5,9 +5,6 @@ from PIL import Image
 
 
 def colorize(mask: torch.Tensor, palette: list):
-    """
-
-    """
     _mask = torch2np(mask, squeeze=True)
     _mask = Image.fromarray(_mask.astype(np.uint8)).convert('P')
     _mask.putpalette(palette)

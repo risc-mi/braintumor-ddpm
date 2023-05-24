@@ -8,7 +8,6 @@ from braintumor_ddpm.data.brats import BRATS
 from braintumor_ddpm.data.datasets import SegmentationDataset
 from braintumor_ddpm.utils.convert_data import move_data
 
-
 # # TODO: add cmd arguments
 # if __name__ == "__main__":
 #     output_directory = input("Output directory: ")

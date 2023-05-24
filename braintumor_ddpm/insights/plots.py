@@ -143,20 +143,6 @@ def visualize_segmentations(images_folder: str,
                             baseline_folder: str,
                             output_folder: str,
                             modality_id: str = '0001') -> None:
-    """
-
-    Args:
-
-        images_folder:
-        ground_truth_folder:
-        predictions_folder:
-        baseline_folder:
-        output_folder:
-        modality_id:
-
-    Returns:
-
-    """
 
     masks = os.listdir(ground_truth_folder)
     for mask in masks:

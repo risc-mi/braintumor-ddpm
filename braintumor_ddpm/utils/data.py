@@ -92,6 +92,7 @@ def normalize(x: Union[np.ndarray, torch.Tensor]) -> Union[np.ndarray, torch.Ten
     return x
 
 
+# TODO: review usages of dump_brats_dataset()
 def dump_brats_dataset(dataset: Dataset, dump_folder: str):
     """ Brats Specific dataset dump """
 
@@ -132,6 +133,7 @@ def scale_features(activations: list, size: Union[int, Tuple], dim: int = 1):
     return torch.cat(resized, dim=dim)
 
 
+# TODO: review usages of prepare_brats_pixels()
 def prepare_brats_pixels(data: Any,
                          feature_extractor: Callable,
                          image_size: int,
