@@ -46,7 +46,7 @@ layer capture high-level features and later layers capture more detailed feature
 &nbsp;
 
 - Sample predictions of different tumor regions are visualized in Fig. 3, a comparison between two pixel-level classifier
-architectures, the fine-tuned noise predictor network and a supervised baseline.
+architectures, the fine-tuned noise predictor network and the nnU-Net supervised baseline.
 <figure>
 <img src="https://raw.githubusercontent.com/risc-mi/braintumor-ddpm/main/docs/assets/sample_predictions.png"
  alt="Generated 128 x 128 BraTS samples" style="width:100%">
