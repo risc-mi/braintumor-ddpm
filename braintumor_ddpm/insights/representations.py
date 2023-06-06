@@ -1,6 +1,8 @@
 """
 Modified from:
 https://github.com/yandex-research/ddpm-segmentation/blob/master/src/feature_extractors.py
+
+Mainly used for visualising and extracting learned representations
 """
 import torch
 from torch import nn

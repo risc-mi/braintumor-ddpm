@@ -43,6 +43,28 @@ layer capture high-level features and later layers capture more detailed feature
 <figcaption><b>Fig. 2: Extracted visual representations for different samples across different layers and time steps.</b></figcaption>
 </figure>
 
+&nbsp;
+
+- Sample predictions of different tumor regions are visualized in Fig. 3, a comparison between two pixel-level classifier
+architectures, the fine-tuned noise predictor network and a supervised baseline.
+<figure>
+<img src="https://raw.githubusercontent.com/risc-mi/braintumor-ddpm/main/docs/assets/sample_predictions.png"
+ alt="Generated 128 x 128 BraTS samples" style="width:100%">
+<figcaption><b>Fig. 3: Sample predictions for multiple input scans.</b></figcaption>
+</figure>
+
+&nbsp;
+
+- A sample practical use-case, where a few tumor containing axial slices from the same patient are used to train the downstream
+pixel-level classifier to produce segmentation maps for the remaining slices within the same volume. Performance is very
+good for slices that contain larger sections of the tumor, while a significant drop in performance is observed for out of
+distribution slices that were not used for training the downstream model or the diffusion model itself.
+<figure>
+<img src="https://raw.githubusercontent.com/risc-mi/braintumor-ddpm/main/docs/assets/usecase.png"
+ alt="Generated 128 x 128 BraTS samples" style="width:100%">
+<figcaption><b>Fig. 3: Sample predictions for multiple input scans.</b></figcaption>
+</figure>
+
 ### Acknowledgements
 This project is financed by research subsidies granted by the government of Upper Austria.
 RISC Software GmbH is Member of UAR (Upper Austrian Research) Innovation Network.
