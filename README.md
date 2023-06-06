@@ -1,7 +1,7 @@
 # Semi-supervised Brain Tumor Segmentation using Diffusion Models
 
 We provide the official PyTorch implementation of the paper titled
-[Semi-supervised Brain Tumor Segmentation Using Diffusion Models](),
+[Semi-supervised Brain Tumor Segmentation Using Diffusion Models](https://link.springer.com/chapter/10.1007/978-3-031-34111-3_27)
 by Ahmed Alshenoudy, Bertram Sabrowsky-Hirsch, Stefan Thumfart, Michael Giretzlehner and Erich Kobler.
 
 Our implementation is based on [Label-Efficient Semantic Segmentation with Diffusion Models](https://github.com/yandex-research/ddpm-segmentation),
@@ -21,7 +21,7 @@ We evaluate the presented approach on the Brain Tumor Segmentation (BraTS) 2021 
 original 3D MR sequences, while stratifying longitudinal slicing locations to increase the proportion of slices containing
 a segmented tumor. All slices were normalized and down-sampled to (128, 128). This resulted in a dataset consisting of 8,757
 slices, of which 8,000 were used for testing and the 757 remaining slices were used as a training pool to sample various
-training datasets from for our experiments. 
+training datasets from for our experiments.
 
 ## Results
 - Our trained diffusion model and a small batch of generated samples can be found [here](https://www.dropbox.com/sh/78x8aamupsidxax/AABmtL06uEh6CGwWWvP3fcCMa?dl=0).
@@ -62,8 +62,25 @@ distribution slices that were not used for training the downstream model or the 
 <figure>
 <img src="https://raw.githubusercontent.com/risc-mi/braintumor-ddpm/main/docs/assets/usecase.png"
  alt="Generated 128 x 128 BraTS samples" style="width:100%">
-<figcaption><b>Fig. 3: Sample predictions for multiple input scans.</b></figcaption>
+<figcaption><b>Fig. 4: Practical use-case for patient-level segmentation.</b></figcaption>
 </figure>
+
+### Citation
+If you find this codebase useful for your research, we would appreciate citing the following conference paper:
+```
+@InProceedings{braintumor_ddpm2023,
+author={Alshenoudy, Ahmed and Sabrowsky-Hirsch, Bertram and Thumfart, Stefan and Giretzlehner, Michael and Kobler, Erich},
+editor={Maglogiannis, Ilias and Iliadis, Lazaros and MacIntyre, John and Dominguez, Manuel},
+title={Semi-supervised Brain Tumor Segmentation Using Diffusion Models},
+booktitle={Artificial Intelligence  Applications  and Innovations},
+year={2023},
+publisher={Springer Nature Switzerland},
+address={Cham},
+pages={314--325},
+isbn={978-3-031-34111-3}.
+doi={10.1007/978-3-031-34111-3_27}
+}
+```
 
 ### Acknowledgements
 This project is financed by research subsidies granted by the government of Upper Austria.
