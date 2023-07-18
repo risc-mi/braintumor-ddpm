@@ -36,7 +36,8 @@ def _resize_volume(volume: np.ndarray, size: int = 128,
 
     volume_copy = np.copy(volume)
     volume_copy = torch.from_numpy(volume_copy)
-    volume_copy = F.resize(volume_copy, size=[size], interpolation=method)
+    # TODO: check antialiasing consistency
+    volume_copy = F.resize(volume_copy, size=[size], interpolation=method, antialias=True)
 
     return volume_copy.numpy()
 
@@ -98,7 +99,6 @@ def move_data(target_dir: str,
     task_folder, images_tr, labels_tr, images_ts, labels_ts = _create_task_folder(root=target_dir,
                                                                                   task_name=f"BraTS{seed}",
                                                                                   task_id=task_id)
-    print(f"\nCopying the exported slices to task folder")
 
     for entry in split['training']:
         images = os.path.join(images_dir, entry)
@@ -204,7 +204,7 @@ def generate_dataset_json(output_file: str, imagesTr_dir: str, imagesTs_dir: str
 
 def convert_brats_to_2d(dataset_path: str,
                         target_dir: str,
-                        slices: list = None,
+                        slices: Union[dict, str],
                         split: Optional[Union[dict, str]] = None,
                         size: int = 128) -> None:
     """
@@ -245,12 +245,15 @@ def convert_brats_to_2d(dataset_path: str,
           f" ({target_dir}) successfully")
 
     # constants and defaults for BraTS dataset
-    if slices is None or len(slices) == 0:
-        _slices = [70, 75, 80, 85, 90, 95, 100]
-        slices = []
-        for i in range(0, 155, 5):
-            if i not in _slices:
-                slices.append(i)
+    if slices is None:
+        slices = [70, 75, 80, 85, 90, 95, 100]
+    elif isinstance(slices, str):
+        if slices.lower() == "all":
+            slices = [i for i in range(0, 155)]
+
+    print(f"\nExporting the following Slices:\n"
+          f"{'=' * 40}\n"
+          f"{slices}")
 
     # check data split, otherwise use all for training
     if isinstance(split, str):
@@ -276,6 +279,7 @@ def convert_brats_to_2d(dataset_path: str,
         't2': '0002',
         'flair': '0003'
     }
+
     total_cases = len(os.listdir(dataset_path))
     print(f"\nTotal cases found: {total_cases}\n"
           f"Training Images: {len(split['training'])}\n"
@@ -327,12 +331,12 @@ def convert_brats_to_2d(dataset_path: str,
                     f"\rExporting slices from patient"
                     f" {os.path.basename(patient)}, progress [{i + 1}/{total_cases}]", end='')
 
-    # create task folders
-    move_data(target_dir=target_dir,
-              split=split,
-              images_dir=images_dir,
-              labels_dir=labels_dir,
-              modality_mapping=modality_mapping)
+    # # create task folders
+    # move_data(target_dir=target_dir,
+    #           split=split,
+    #           images_dir=images_dir,
+    #           labels_dir=labels_dir,
+    #           modality_mapping=modality_mapping)
 
     print(f"\nFinished exporting and splitting data")
 
