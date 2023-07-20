@@ -89,3 +89,7 @@ RISC Software GmbH is Member of UAR (Upper Austrian Research) Innovation Network
 ### TODO:
 - [ ] Tutorial notebook on how to use the pipeline for segmentation
 - [ ] Addition of Deep/Wide MLP architecture and normal initialization
+- [ ] Requirements file notes:
+  - [ ] Numpy (< 1.24.0) due to conflict with MedPy (used for HD95 metric)
+  - [ ] Introduced anti-alias parameter in torchvision
+  - [ ] MPI, used for `dist_utils` in improved diffusion
