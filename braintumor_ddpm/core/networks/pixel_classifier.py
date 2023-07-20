@@ -13,7 +13,7 @@ class PixelClassifier(GenericDiffusionNetwork):
                  ddpm_model_path: str,
                  layers: list,
                  time_steps: list,
-                 num_classes: int,
+                 num_classes: int = 4,
                  use_input_activations: bool = False):
         super().__init__()
 

@@ -85,3 +85,7 @@ doi={10.1007/978-3-031-34111-3_27}
 ### Acknowledgements
 This project is financed by research subsidies granted by the government of Upper Austria.
 RISC Software GmbH is Member of UAR (Upper Austrian Research) Innovation Network.
+
+### TODO:
+- [ ] Tutorial notebook on how to use the pipeline for segmentation
+- [ ] Addition of Deep/Wide MLP architecture and normal initialization

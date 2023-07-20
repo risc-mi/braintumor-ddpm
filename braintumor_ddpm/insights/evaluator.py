@@ -198,11 +198,11 @@ class NiftiEvaluator:
         print(f"Finished evaluating directories.")
         if output_dir is not None:
             with open(os.path.join(output_dir, "summary_labels.json"), 'w') as jf:
-                json.dump(all_results, jf)
+                json.dump(all_results, jf, indent=4)
             jf.close()
 
             with open(os.path.join(output_dir, "summary_regions.json"), 'w') as jf:
-                json.dump(all_results_regions, jf)
+                json.dump(all_results_regions, jf, indent=4)
             jf.close()
 
         return all_results

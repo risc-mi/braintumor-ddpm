@@ -33,7 +33,7 @@ def _read_tiff(path: str):
     reads tiff images and multi-page tiff images, returns a torch tensor
     with a shape of [channels, height, width]
     """
-    image = tiff.imread(path)
+    image = tiff.imread(path).squeeze()
     if image.ndim > 2:
         # format is (C, H, W)
         channels = image.shape[-1]

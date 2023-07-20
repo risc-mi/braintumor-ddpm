@@ -37,7 +37,7 @@ class PixelRepresentationsTrainer(SimpleNetworkTrainer):
         self.device = device
         self.network = network
         self.batch_size = batch_size
-        self.online_augmentation = OnlineAugmentation()
+        self.online_augmentation = None
         self.augment_every = 10
         self.softmax = nn.Softmax(dim=1)
         self.loss_function = nn.CrossEntropyLoss(weight=torch.Tensor([0.1, 0.3, 0.3, 0.3]).to(self.device))
@@ -159,7 +159,7 @@ class PixelRepresentationsTrainer(SimpleNetworkTrainer):
             self.split_metadata['valid']['ids'] = self.valid_data.indices
 
         with open(os.path.join(self.output_folder, "data_splits.json"), 'w') as jf:
-            json.dump(self.split_metadata, jf)
+            json.dump(self.split_metadata, jf, indent=4)
 
     def prepare_pixel_data(self, data: Dataset) -> PixelDataset:
         """ Creates a Pixel dataset from an input dataset, required for training Pixel Level Classifier """
@@ -172,6 +172,7 @@ class PixelRepresentationsTrainer(SimpleNetworkTrainer):
         for i in range(0, data.__len__()):
 
             image, mask = data[i]
+            # Online augmentation was used to experiment only
             if self.online_augmentation is not None:
                 image, mask = self.online_augmentation(image, mask)
 

@@ -167,7 +167,7 @@ class DenoiseNetworkTrainer(SimpleNetworkTrainer):
             self.split_metadata['valid']['ids'] = self.valid_data.indices
 
         with open(os.path.join(self.output_folder, "data_splits.json"), 'w') as jf:
-            json.dump(self.split_metadata, jf)
+            json.dump(self.split_metadata, jf, indent=4)
 
     def initialize_optimizer_and_scheduler(self) -> None:
         """ Setup optimizer and optionally the lr scheduler """

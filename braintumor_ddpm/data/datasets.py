@@ -151,7 +151,7 @@ class SegmentationDataset(Dataset):
         else:
             mask = None
 
-        # apply transforms
+        # apply transforms, image -> (C, H, W) and mask -> (H, W)*
         image, mask = self.transforms(image, mask)
 
         if self.train:
